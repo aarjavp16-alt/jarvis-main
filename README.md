@@ -19,6 +19,7 @@ The included black `jarvis.jpg` artwork is used for personalized welcome cards a
 - Order IDs, order history, customer profiles, loyalty points, vouches, seller claim stats, and staff dashboard.
 - Welcome messages, giveaways, custom responses, moderation, maintenance flag, error/audit logs, and consistent daily SQLite backups.
 - Guided `$setup` menus configure roles and channels inside Discord. `$checkup` reports missing bot permissions and configuration without exposing secrets.
+- `$helpo` is a separate owner-only command index, grouped into setup, shop, server settings, moderation, and operations panels. `$help` stays member/staff role-filtered and `$helps` remains the detailed Staff/Admin guide.
 - Safe restore flow: `$backuplist` lists backups; `$restorebackup <filename>` requires confirmation, validates the file, and creates a pre-restore safety copy.
 - Automatic catalog monitoring: after SellAuth URL/key and an alert channel are set once, JARVIS syncs products every 6 hours and posts new or changed stock alerts.
 - Prefix commands use no spaces in command names (for example `$addrole`, `$setwelcome`, `$syncproducts`).
