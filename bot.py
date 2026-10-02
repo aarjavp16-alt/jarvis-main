@@ -1185,6 +1185,29 @@ async def helps_cmd(ctx, category: str = ""):
     await ctx.reply(embed=embed, mention_author=False)
 
 
+@bot.command(name="helpo")
+async def owner_help(ctx):
+    """Private command index for the Discord server owner."""
+    if not ctx.guild or ctx.author.id != ctx.guild.owner_id:
+        return await ctx.reply("🔒 This command panel is only available to this Discord server's owner.", mention_author=False)
+    embed = discord.Embed(
+        title="👑 JARVIS AI • Owner Command Panel",
+        description="Owner-only index of the server setup and management commands. Run `$helps <category>` for detailed instructions.",
+        color=0xD4AF37,
+    )
+    panels = (
+        ("🧭 Setup & access", "`$setup` • guided role/channel setup\n`$checkup` • permissions and configuration check\n`$fill` • create missing standard roles\n`$setrole` • map Admin/Staff/Seller/Customer/Member roles\n`$setverifyrole` • choose Verified role\n`$verifypanel` • post verification button\n`$verificationlock` / `$verificationunlock` • restrict/restore channel visibility"),
+        ("🎫 Tickets & shop", "`$ticketpanel` • post ticket panel\n`$setticketcategory` • choose ticket category\n`$config` • store/SellAuth settings\n`$syncproducts` • sync now; automatic sync runs every 6 hours when configured\n`$setrestock` / `$lowstock` / `$restock` • stock alerts\n`$ordercreate` / `$verifycustomer` • record or manually verify purchases"),
+        ("📣 Server settings", "`$setlog` • audit/transcript channel\n`$setwelcome` / `$autorole` • welcome and join roles\n`$reactionrole` • configure reaction roles\n`$security on|off` • security filters\n`$maintenance on|off` • pause/resume new tickets"),
+        ("🛡️ Moderation & community", "`$ban` / `$kick` • server moderation\n`$giveaway` / `$giveawayend` • giveaways\n`$customadd` / `$customremove` • automatic replies\n`$autotranslate` • channel translation\n`$broadcast` • DM verified members"),
+        ("💾 Operations", "`$backup` • create and download a database snapshot\n`$backuplist` • list saved snapshots\n`$restorebackup <filename>` • validated restore with confirmation and safety copy\n`$dashboard` / `$sales` / `$sellerstats` • shop reports"),
+    )
+    for name, value in panels:
+        embed.add_field(name=name, value=value, inline=False)
+    embed.set_footer(text="Only the Discord server owner can open this panel. Individual commands still check their required permissions.")
+    await ctx.reply(embed=embed, mention_author=False)
+
+
 @bot.command(name="invites")
 async def invites_cmd(ctx, member: Optional[discord.Member] = None):
     target = member or ctx.author
